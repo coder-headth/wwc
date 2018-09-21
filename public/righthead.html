@@ -1,0 +1,255 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.weaver.com.cn/subpage/util/register/css/theme-popover.css"/>
+    <script type="text/javascript" src="http://www.weaver.com.cn/subpage/util/register/js/theme-popover.js"></script>
+    <script type="text/javascript" src="http://www.weaver.com.cn/subpage/util/register/js/scrolltopcontrol.js"></script>
+    <script type="text/javascript" src="../libs/apply/apply.js"></script>
+</head>
+
+<div class="headBox mainbg">
+    <div class="mainBox">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8">
+                <div class="btn_home">
+                    <a href="../index.html">首页</a>
+                </div>
+                <div class="cityBox">
+                    <span>城市区域：</span>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">华东地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity1"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>                
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">华北地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity2"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">东北地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity3"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">华南地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity4"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">华中地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity5"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">西部地区</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="subsityBox">
+                                        <div class="subsity_info">全国各区域城市：</div>
+                                        <div class="subsity" id="subsity6"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="btn_infoBox">
+                    <div class="btn_info2">
+                       <a href="javascript:void(0);">活动报名</a> 
+                    </div>
+                    <div class="btn_info">
+                       <a class="apply" href="javascript:void(0);">产品体验</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="signupbg">
+    <div class="signupBox" id="signupBox">
+        <div class="signup_close">
+            <a id="signupclose" href="javascript:void(0);">关闭</a>
+        </div>
+        <div class="signup_Notes">
+            <span>所有活动报名</span>
+        </div>
+     
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    // 点击显示效果
+     $(document).ready(function() {
+        setTimeout(function() {
+            $('.apply,.applybtn').themePopover();
+        }, 1000);
+        $(".btn_info2 a").click(function(){
+            $(".signupbg").show();
+        });
+        $("#signupclose").click(function(){
+            $(".signupbg").hide();
+        });
+        $.ajax({
+ 			url: "http://live.weaver.com.cn/market/subpage/getCityList",
+	      type: "GET",
+	      dataType: "jsonp",
+	      jsonp:'jsonpcallback',
+	      success: function (data) {
+	        if(data.success){
+	           var _html1="",_html2="",_html3="",_html4="",_html5="",_html6="";
+	           var _list = data.cityList;
+	           if(_list){
+	              $.each(_list,function(i,n){
+	                 if(n.area==1){
+	                    _html1 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }else if(n.area==2){
+	                    _html2 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }else if(n.area==3){
+	                 	_html3 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }else if(n.area==4){
+	                 	_html4 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }else if(n.area==5){
+	                 	_html5 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }else{
+	                 	_html6 +="<a href=\"javaScript:aclick("+n.id+")\">"+n.name+"</a>";
+	                 }
+	              });
+	              $("#subsity1").append(_html1);
+	              $("#subsity2").append(_html2);
+	              $("#subsity3").append(_html3);
+	              $("#subsity4").append(_html4);
+	              $("#subsity5").append(_html5);
+	              $("#subsity6").append(_html6);
+	           }
+	           var signupList = data.signupList;
+	           if(signupList){
+	              var category = "";
+	              var _html = "";
+	              $.each(data.categoryList,function(j,m){
+	                 _html +="<div class=\"signup_type\"><div class=\"signup_type_title\">"+m.name+"-报名</div>";
+	                 _html +="<div class=\"signup_Btn\">";
+	                 $.each(signupList,function(i,n){
+		                 if(m.category==n.category){
+		                    _html +="<a href=\""+n.signuplinked+"\" target=\"_blank\">"+n.city+" · "+n.startdate+"</a>";
+		                 }
+		             });
+	                 _html +="</div></div>";
+	              });
+	              $("#signupBox").append(_html);
+	           }
+	        }
+	      },
+	      error: function () {
+	      },
+	      complete: function () {
+	      }
+	   });
+    });
+    function aclick(id){
+           window.location = "../subpage/cityactive.html?id="+id;
+           /*
+           $.ajax({
+		      url: "http://live.weaver.com.cn/market/subpage/getIndexList",
+		      type: "post",
+		      dataType: "json",
+		      data:{"cityid":id},
+		      success: function (data) {
+		        if(data.success){
+		           var list = data.cList;
+		           if(list){
+		        		var _html ="";
+		        		var cdate = data.cdate;
+		        		$.each(list,function(i,n){
+		        			var activeList = n.activeList;
+		        			if(activeList && activeList.length>0){
+			        			var category = n.category;
+			        			_html +="<div class=\"listtype\"><div class=\"listTile\">";
+			        			_html +="<div class=\"listT1\"><span class=\"listT1_name1\">"+category.name+"</span><span class=\"listT1_name2\">"+category.enname+"</span></div>";
+			        			_html +="<div class=\"listT2\"><span>"+category.describe+"</span><a href=\"javascript:void(0)\">查看更多活动</a></div>";
+			        			_html +="</div>";
+			        			_html +="<div class=\"listtype_PD\"><div class=\"row\">";
+		        			   $.each(activeList,function(j,m){
+		        			      _html +="<div class=\"col-xs-12 col-sm-6 col-md-3 col-lg-2\"><div class=\"listBox\">";
+		        			     if(m.startdate!="" && cdate<m.startdate){
+		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_text\">";
+		        			        _html +="预约报名中...</div>";
+		        			        _html +="<div class=\"signup_listbtn\">";
+		        			        if(m.signuplinked){
+		        			           _html +="<a href=\""+m.signuplinked+"\" target='_blank'>报名</a>";
+		        			        }else{
+		        			           _html +="<a href=\"#\">报名</a>";
+		        			        }
+		        			        _html +="</div></div>";
+		        			     }
+		        			     if(m.startdate!="" && cdate==m.startdate){
+		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_listbtn2\">";
+		        			        _html +="<a href=\"javaScript:void(0)\">今天</a>";
+		        			        _html +="</div></div>";
+		        			     }
+		        			      _html +="<div class=\"listBox_sub\">";
+		        			      if(m.linked!=null && m.linked!=""){
+		        			        _html +="<a href=\""+m.linked+"\" target='_blank'>";
+		        			      }else{
+		        			        _html +="<a href=\"#\" target='_blank'>";
+		        			      }
+		        			      _html +="<div class=\"listimg\"><img src=\"http://live.weaver.com.cn/file/"+m.pics+"\"/></div>";
+		        			      _html +="<div class=\"listtextBox\"><div class=\"listtextBox_title\">";
+		        			      _html +="<span class=\"listtextBox_tcity\">"+m.city+"</span><span class=\"listtextBox_thotel\">-"+m.hotelname+"</span>";
+		        			      _html +="</div>";
+		        			      if(m.startdate!=""){
+		        			         _html +="<div class=\"listtextBox_info\"><span class=\"listtextBox_info_notes\">举办时间：</span><span class=\"listtextBox_info_time\">"+m.startdate+"</span></div>";
+		        			      }
+		        			      _html +="</div>";
+		        			      _html +="</a></div>";
+		        			      _html +="</div></div>";
+		        			   })
+		        			}
+		        			_html +="</div></div>";
+		        			_html +="</div>";
+		        		});
+		        		$("#i_mainBox").empty().append(_html);
+		        	}
+		        }
+		      },
+		      error: function () {
+		      },
+		      complete: function () {
+		      }
+		   });*/
+        }
+</script>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <title>泛微市场品牌活动</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="泛微,OA,OA系统,移动办公,OA软件,办公自动化,协同OA,知识管理,流程管理,信息门户,协同管理,移动OA,OA集成,大OA"> 
+    <meta name="description" content="泛微公司专业研发协同OA管理软件,致力于为企业用户提供专业OA,办公自动化,OA系统,OA软件,知识管理,流程管理,信息门户,协同OA,移动OA,移动办公,协同管理软件的咨询、订制及应用解决方案。">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="/market/event/libs/jquery/jquery.min.js"></script>
+    <!-- 相应式框架默认文件 -->
+    <link href="/market/event/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/market/event/libs/animate/animate.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap 响应式前端框架 -->
+    <script src="/market/event/libs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="/market/event/libs/bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/market/event/libs/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 全局样式 -->
+    <link href="/market/event/css/css.css" rel="stylesheet" type="text/css" />
+    <link href="/market/event/css/media.css" rel="stylesheet" type="text/css" />
+    
+    <!-- 公共js  引入文件 -->
+    <script src="/market/event/public/leftmain.js"></script>
+    <script src="/market/event/public/righthead.js"></script>
+</head>
+<body>
+
+    <div id="leftmain" class="leftmain"></div>
+    <div id="righthead" class="righthead"></div>
+    <div class="rightmain" id="detailmain"></div>
+    <script type="text/javascript">
+      var weekDay=new Array('周日','周一','周二','周三','周四','周五','周六');
+      $(document).ready(function(){
+         var _id = GetQueryString("id");
+         $.ajax({
+	      url: "http://live.weaver.com.cn/market/subpage/getActiveInfo",
+	      type: "GET",
+	      dataType: "jsonp",
+	      jsonp:'jsonpcallback',
+	      data:{"id":_id},
+	      success: function (data) {
+	        if(data.success){
+	           var cid = data.id;
+	           var _h = "";
+	           if(cid!=""){
+	              var cdate = data.cdate;
+	              _h +="<div class=\"mainBox\"><div class=\"listTile\">";
+	              _h +="<div class=\"listT1\"><span class=\"listT1_name1\">"+data.name+"</span>";
+	              _h +="<span class=\"listT1_name2\">"+data.enname+"</span></div>";
+	              _h +="<div class=\"listT2\">"+data.describe+"</div>";
+	              _h +="</div></div>";
+	              _h +="<div class=\"mainBox\"><div class=\"Boxtitle_details\">";
+	              _h +="<div class=\"Boxtitle_details_left\"><span class=\"Boxtitle_details_left_t1\">"+data.city+"</span>";
+	              _h +="<span class=\"Boxtitle_details_left_t2\"> · "+data.hotelname+"</span></div>";
+	              _h +="<div class=\"Boxtitle_details_right\"><div class=\"Boxtitle_details_right_t\">";
+	              var _startdate = data.startdate;
+	              _h +="<span class=\"Boxtitle_details_right_t1\">"+_startdate.replace(/-/g,".")+"</span>";
+	              var startTime = new Date(_startdate.replace(/-/g,"/"));
+	              _h +="<span class=\"Boxtitle_details_right_t2\">/</span>";
+	              _h +="<span class=\"Boxtitle_details_right_t1\">"+weekDay[startTime.getDay()]+"</span>";
+	              _h +="<span class=\"Boxtitle_details_right_t2\">/</span></div>";
+	              if(data.signuplinked!=null && data.signuplinked!="" && _startdate!="" && cdate<_startdate){
+	                 _h +="<a href=\""+data.signuplinked+"\" target=\"_blank\">活动报名</a>";
+	              }
+	              _h +="</div></div>";
+	              if(data.content!=null && data.content!=""){
+	                 _h +="<div class=\"Boxmain_detailsBox\">"+data.content;
+	              }else{
+	                  _h +="<div class=\"Boxmain_detailsBox\">暂未内容";
+	              }
+	              _h +="</div></div>";
+	           }else{
+	              _h +="<div style=\"text-align:center;\">";
+	              _h +="<div style=\"padding-left: 20px;padding-right: 20px;color: #999999;font-size: 16px;line-height: 30px;\">";
+	              _h +="此活动不存在,请联系管理员或稍后重试!</div></div>";
+	           }
+	           $("#detailmain").append(_h);
+	        }
+	      },
+	      error: function () {
+	      },
+	      complete: function () {
+	      }
+	   });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+    <title>泛微市场品牌活动</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="泛微,OA,OA系统,移动办公,OA软件,办公自动化,协同OA,知识管理,流程管理,信息门户,协同管理,移动OA,OA集成,大OA"> 
+    <meta name="description" content="泛微公司专业研发协同OA管理软件,致力于为企业用户提供专业OA,办公自动化,OA系统,OA软件,知识管理,流程管理,信息门户,协同OA,移动OA,移动办公,协同管理软件的咨询、订制及应用解决方案。">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="./libs/jquery/jquery.min.js"></script>
+    <!-- 相应式框架默认文件 -->
+    <link href="./libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="./libs/animate/animate.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap 响应式前端框架 -->
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="./libs/bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./libs/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 全局样式 -->
+    <link href="./css/css.css" rel="stylesheet" type="text/css" />
+    <link href="./css/media.css" rel="stylesheet" type="text/css" />
+
+    <!-- 滑动插件 -->
+    <link rel="stylesheet" href="./libs/swiper/css/swiper.min.css">
+    <script src="./libs/swiper/js/swiper.min.js"></script>
+    <!-- 公共js  引入文件 -->
+    <script type="text/javascript" src="./public/leftmain.js"></script>
+    <script type="text/javascript" src="./public/righthead.js"></script>
+</head>
+
+<body>
+
+    <div id="leftmain" class="leftmain"></div>
+    <div id="righthead" class="righthead"></div>
+    <div class="rightmain">
+        <!-- banner 新闻 -->
+        <div class="newsbanner">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-8">
+                    <div class="newsBox bannerimg">
+                        <!-- Swiper -->
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="newsBoximg newsBoximg1">
+                                        <a href=""></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="newsBoximg newsBoximg2">
+                                        <a href=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="newsBox2">
+                        <div class="newsBox_maintitle">最新新闻</div>
+                        <div class="newsBox_listBox">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 2018年市场活动 -->
+        <div class="mainBox" id="i_mainBox" style="margin-top: 40px;">
+           
+        </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+	        // banner 滑动
+	        var swiper = new Swiper('.swiper-container', {
+	            pagination: '.swiper-pagination',
+	            paginationClickable: true
+	        });
+	        $.ajax({
+		      url: "http://live.weaver.com.cn/market/subpage/getIndexList",
+		      type: "GET",
+		      dataType: "jsonp",
+		      jsonp:'jsonpcallback',
+		      success: function (data) {
+		        if(data.success){
+		           var list = data.cList;
+		           if(list){
+		        		var _html ="";
+		        		var cdate = data.cdate;
+		        		$.each(list,function(i,n){
+		        			var activeList = n.activeList;
+		        			if(activeList && activeList.length>0){
+			        			_html +="<div class=\"listtype\"><div class=\"listTile\">";
+			        			_html +="<div class=\"listT1\"><span class=\"listT1_name1\">"+n.categoryname+"</span><span class=\"listT1_name2\">"+n.categoryenname+"</span></div>";
+			        			_html +="<div class=\"listT2\"><span>"+n.categorydescribe+"</span><a href=\"javascript:void(0)\">查看更多活动</a></div>";
+			        			_html +="</div>";
+			        			_html +="<div class=\"listtype_PD\"><div class=\"row\">";
+		        			   $.each(activeList,function(j,m){
+		        			      _html +="<div class=\"col-xs-12 col-sm-6 col-md-3 col-lg-2\"><div class=\"listBox\">";
+		        			     if(m.startdate!="" && cdate<m.startdate){
+		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_text\">";
+		        			        _html +="预约报名中...</div>";
+		        			        _html +="<div class=\"signup_listbtn\">";
+		        			        if(m.signuplinked){
+		        			           _html +="<a href=\""+m.signuplinked+"\" target='_blank'>报名</a>";
+		        			        }else{
+		        			           _html +="<a href=\"#\">报名</a>";
+		        			        }
+		        			        _html +="</div></div>";
+		        			     }
+		        			     if(m.startdate!="" && cdate==m.startdate){
+		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_listbtn2\">";
+		        			        _html +="<a href=\"javaScript:void(0)\">今天</a>";
+		        			        _html +="</div></div>";
+		        			     }
+		        			      _html +="<div class=\"listBox_sub\">";
+		        			      if(m.linked!=null && m.linked!=""){
+		        			        _html +="<a href=\""+m.linked+"\" target='_blank'>";
+		        			      }else{
+		        			        _html +="<a href=\"/market/event/subpage/detail.html?id="+m.id+"\" target='_blank'>";
+		        			      }
+		        			      _html +="<div class=\"listimg\"><img src=\"http://live.weaver.com.cn/file/"+m.pics+"\"/></div>";
+		        			      _html +="<div class=\"listtextBox\"><div class=\"listtextBox_title\">";
+		        			      _html +="<span class=\"listtextBox_tcity\">"+m.city+"</span><span class=\"listtextBox_thotel\">-"+m.hotelname+"</span>";
+		        			      _html +="</div>";
+		        			      if(m.startdate!=""){
+		        			         _html +="<div class=\"listtextBox_info\"><span class=\"listtextBox_info_notes\">举办时间：</span><span class=\"listtextBox_info_time\">"+m.startdate+"</span></div>";
+		        			      }
+		        			      _html +="</div>";
+		        			      _html +="</a></div>";
+		        			      _html +="</div></div>";
+		        			   })
+		        			}
+		        			_html +="</div></div>";
+		        			_html +="</div>";
+		        		});
+		        		$("#i_mainBox").append(_html);
+		        	}
+		        	var _list1 = data.list1;
+		        	if(_list1){
+		        	   var _h ="";
+		        	   $.each(_list1,function(i,n){
+		        	      _h +="<div class=\"newsBox_list\">";
+		        	      _h +="<span class=\"newsBox_list_t1\"><a href=\"http://www.weaver.com.cn/subpage/aboutus/news/news-detail-"+n.id+".html\" target=\"_blank\">"+n.title+"</a></span>";
+		        	      _h +="<span class=\"newsBox_list_t2\">更新日期："+n.addtime+"</span>";
+		        	      _h +="<span class=\"newsBox_list_t3\">"+n.summary+"</summary>";
+		        	      _h +="</div>"
+		        	      if(i==0){
+		        	         _h +="<div class=\"newsBox_listline\"></div>";
+		        	      }
+		        	   });
+		        	   $(".newsBox_listBox").append(_h);
+		        	}
+		        }
+		      },
+		      error: function () {
+		      },
+		      complete: function () {
+		      }
+		   });
+        })
+	</script>
+</body>
+</html>

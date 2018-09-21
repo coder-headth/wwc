@@ -1,0 +1,95 @@
+<div class="logoBox">
+    <div class="BoxPD">
+        <div class="logoBox_img">
+            <img src="../images/logo.png">
+        </div>
+        <div class="logoBox_line">|</div>
+        <div class="logoBox_text">
+            品牌活动
+        </div>
+    </div>
+</div>
+<div class="leftmenuBox">
+    <div class="BoxPD">
+        <div class="leftmenuBox_line"></div>
+    </div>
+    <div class="BoxPD">
+        <div class="left_type">品牌活动类型</div>
+    </div>
+    <div class="left_navlist">
+        <ul id="_renderMenu">
+            <!-- 动态渲染空节点 -->
+        </ul>
+    </div>
+    <div class="BoxPD">
+        <div class="leftmenuBox_line"></div>
+    </div>
+</div>
+<div class="left_Contactus">
+    <div class="BoxPD">
+        <div class="left_type">联系我们</div>
+        <div class="left_ContactusBox">
+            <div class="left_Contactus_list">
+                <span>官方电话：</span>
+                <a href="tel:400-820-2126">
+                    400-820-2126
+                </a>
+            </div>
+            <div class="left_Contactus_list">
+                <span>官方邮箱：</span>
+                <a href="#">
+                    sales@weaver.com.cn
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="copyrightBox">
+    <!-- copyright -->
+    <div id="copyright"></div>
+</div>
+
+
+<script type="text/javascript">
+    $("#leftmain").ready(function(){
+        // 发起请求加载菜单
+        $.ajax({
+            url: "http://192.168.1.75:8888/market/subpage/getActiveMenu",
+            type: "GET",
+            dataType: "jsonp",
+            jsonp:'jsonpcallback',
+            success: function(data) {
+                data.success === true ? window.renderLeftMenu(data.list) : window.alert('请求失败')
+            },
+        });
+        // 渲染菜单节点
+        window.renderLeftMenu = function(list) {
+            var tag = '';
+            $.map(list, function(item) {
+                tag += '<li><a href="javaScript:void(0);" _link="/subpage/brandActive.html?id=' + item.id + '">' + item.name + '</a></li>'
+            })
+            $('#_renderMenu').empty();
+            $('#_renderMenu').append(tag);
+            window.bindMenuLink();
+        }
+        // 绑定跳转事件
+        window.bindMenuLink = function() {
+            var _href = window.location.href;
+            $(".left_navlist ul li a").each(function(){
+            var _link = $(this).attr("_link");
+            if(_href.indexOf(_link)>-1){
+                $(this).addClass("active");
+                return false;
+            }
+            });
+            $(".left_navlist ul li a").click(function(){
+                var _link = $(this).attr("_link");
+                window.location = _link;
+            });
+        }
+    })
+</script>
+<script type="text/javascript" src="/copyright/copyright-utf8.js" ></script>
+
+
