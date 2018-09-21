@@ -1,4 +1,4 @@
-# 泛微市场品牌活动页面
+# Weaver 市场品牌活动页面
 
 ``` npm
 // cd 进入 market/event 路径
