@@ -35,7 +35,7 @@ iDisplayLength ：每页显示条数 可选
                                                                         hotelname  酒店名称
                                                                         city 城市名称
                                                                         startdate 举办时间
-                                                                        pics 活动图片   http://live.weaver.com.cn/file/加上此pics
+                                                                        pics 活动图片   http://live.weaver.com.cn/file/${pics}
                                                                         linked 活动详情链接  若没有则为/website/market/subpage/detail.html?id=加上活动id
                                                                         signuplinked 报名地址链接  只有当举办时间大于当前时间才会显示报名链接
 

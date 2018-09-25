@@ -60,41 +60,47 @@
       var This = this;
       var tag = '';
       $.map(list, function(item) {
-        tag += '<div class="Boxlist_years"><span class="Boxlist_years_t1">2018</span><span class="Boxlist_years_t2">/ Years</span></div>';
+        tag += '<div class="Boxlist_years"><span class="Boxlist_years_t1">' + item.cyear + '</span><span class="Boxlist_years_t2">/ Years</span></div>';
         tag +=   '<div class="Boxlist_Month">'
         tag +=       '<div class="Titlelist_Month">'
-        tag +=           '<span class="Titlelist_Month_t1">8月</span>'
+        tag +=           '<span class="Titlelist_Month_t1">' + item.cmonth + '月</span>'
         tag +=           '<span class="Titlelist_Month_t2">/ August</span>'
         tag +=       '</div>'
         tag +=       '<div class="listtype_PD2">'
         tag +=           '<div class="row">'
-        tag +=               This.renderActiveDetail();
+        tag +=               This.renderActiveDetail(item.activeList);
         tag +=           '</div>'
         tag +=       '</div>'
         tag +=   '</div>'
       });
       $('#renderActiveList').append(tag);
     }
-    // 渲染活动明细
-    WeaBrandActive.prototype.renderActiveDetail = function() {
+    /**
+     * 渲染活动明细
+     * @param {Array} list 当月活动明细
+     * @returns {String} 活动明细模板
+     */
+    WeaBrandActive.prototype.renderActiveDetail = function(list) {
       var tag = '';
-      tag += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">'
-      tag +=    '<div class="listBox">'
-      tag +=        '<div class="list_signupinfo">'
-      tag +=            '<div class="signup_text">预约报名中...</div>'
-      tag +=            '<div class="signup_listbtn"><a href="#">报名</a></div>'
-      tag +=        '</div>'
-      tag +=        '<div class="listBox_sub">'
-      tag +=            '<a href="#">'
-      tag +=                '<div class="listimg"><img src="images/img_list_KP_1.jpg"></div>'
-      tag +=                '<div class="listtextBox">'
-      tag +=                    '<div class="listtextBox_title"><span class="listtextBox_tcity">新疆</span><span class="listtextBox_thotel">-希尔顿酒店</span></div>'
-      tag +=                    '<div class="listtextBox_info"><span class="listtextBox_info_notes">举办时间：</span><span class="listtextBox_info_time">2018-08-02</span></div>'
-      tag +=                '</div>'
-      tag +=            '</a>'
-      tag +=        '</div>'
-      tag +=    '</div>'
-      tag +='</div>'
+      $.map(list, function(item) {
+        tag += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">'
+        tag +=    '<div class="listBox">'
+        tag +=        '<div class="list_signupinfo">'
+        tag +=            '<div class="signup_text">预约报名中...</div>'
+        tag +=            '<div class="signup_listbtn"><a href="#">报名</a></div>'
+        tag +=        '</div>'
+        tag +=        '<div class="listBox_sub">'
+        tag +=            '<a href="#">'
+        tag +=                '<div class="listimg"><img src="images/img_list_KP_1.jpg"></div>'
+        tag +=                '<div class="listtextBox">'
+        tag +=                    '<div class="listtextBox_title"><span class="listtextBox_tcity">新疆</span><span class="listtextBox_thotel">-希尔顿酒店</span></div>'
+        tag +=                    '<div class="listtextBox_info"><span class="listtextBox_info_notes">举办时间：</span><span class="listtextBox_info_time">2018-08-02</span></div>'
+        tag +=                '</div>'
+        tag +=            '</a>'
+        tag +=        '</div>'
+        tag +=    '</div>'
+        tag +='</div>'
+      });
       return tag;
     }
     // 设置所有盒子高度
