@@ -2,7 +2,7 @@
 /**
  * 构造函数-
  * 泛微配品牌活动分页组件
- * @param {any} option 配置项
+ * @param {Object} option 配置项
  */
 function WeaBrandActive({ url }) {
   this.id = this.getCategoryIDByUrl();
@@ -61,8 +61,12 @@ WeaBrandActive.prototype.fetchActiveList = function(id, iDisplayStart) {
 WeaBrandActive.prototype.renderActiveList = function(list) {
   var This = this;
   var tag = '';
+  var _year = '';
   $.map(list, function(item) {
-    tag += '<div class="Boxlist_years"><span class="Boxlist_years_t1">' + item.cyear + '</span><span class="Boxlist_years_t2">/ Years</span></div>';
+    if(item.cyear != _year){
+      tag += '<div class="Boxlist_years"><span class="Boxlist_years_t1">' + item.cyear + '</span><span class="Boxlist_years_t2">/ Years</span></div>';
+      _year = item.cyear;
+    }
     tag +=   '<div class="Boxlist_Month">'
     tag +=       '<div class="Titlelist_Month">'
     tag +=           '<span class="Titlelist_Month_t1">' + item.cmonth + '月</span>'
