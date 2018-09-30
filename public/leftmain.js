@@ -1,7 +1,7 @@
 //引入该js,即可引入一级顶部菜单
 $(function(){
     var url = window.location.href;
-    $("#leftmain").load("/public/leftmain.html",function(){
+    	$("#leftmain").load("/market/event/public/leftmain.html",function(){
     });
 });
 

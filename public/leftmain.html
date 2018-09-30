@@ -1,7 +1,7 @@
 <div class="logoBox">
     <div class="BoxPD">
         <div class="logoBox_img">
-            <img src="../images/logo.png">
+            <img src="/market/event/images/logo.png">
         </div>
         <div class="logoBox_line">|</div>
         <div class="logoBox_text">
@@ -67,7 +67,7 @@
         window.renderLeftMenu = function(list) {
             var tag = '';
             $.map(list, function(item) {
-                tag += '<li><a href="javaScript:void(0);" _link="/subpage/brandActive.html?id=' + item.id + '">' + item.name + '</a></li>'
+                tag += '<li><a href="javaScript:void(0);" _link="/market/event/subpage/brandActive.html?id=' + item.id + '">' + item.name + '</a></li>'
             })
             $('#_renderMenu').empty();
             $('#_renderMenu').append(tag);

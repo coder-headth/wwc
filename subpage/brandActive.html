@@ -21,7 +21,24 @@
     <script src="../public/leftmain.js"></script>
     <script src="../public/righthead.js"></script>
     <style>
-        .wea-more-btn{ text-align: center; cursor: pointer; }
+        .wea-more-btn{ 
+            width: 40px; 
+            height: 40px; 
+            margin: 0 auto; 
+            background: rgba(0,0,0,.1);
+            transition-duration: 0.3s;
+            border-radius: 20px; 
+            text-align: center;
+            cursor: pointer; 
+            line-height: 40px;
+            font-size: 16px;
+            box-shadow: #ccc 2px 2px 2px 2px;
+            margin-bottom: 20px;
+        }
+        .wea-more-btn:hover{
+            background: #2cca43;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -38,7 +55,7 @@
 
         </div>
         <!-- 加载更多按钮 -->
-        <h4 class="wea-more-btn" id="wea_next_btn" onclick="wea.loadMore()">加载更多</h4>
+        <div class="wea-more-btn" id="wea_next_btn" onclick="wea.loadMore()">∨</div>
     </div>
     <!-- Bootstrap 响应式前端框架 -->
     <script src="../libs/bootstrap/js/bootstrap.min.js"></script>
@@ -55,9 +72,7 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-        var wea = new WeaBrandActive({
-            url: 'http://192.168.31.221:8080/market/subpage/getActiveByCategory'
-        });
+        var wea = new WeaBrandActive('http://192.168.31.221:8080/market/subpage/getActiveByCategory');
         $(document).ready(function() {
             wea.loadMore();
         })

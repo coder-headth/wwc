@@ -10,9 +10,9 @@
   window.WeaBrandActive = WeaBrandActive;
   /**
    * 构造函数-泛微配品牌活动分页组件
-   * @param {Object} option 配置项
+   * @param {String} url 请求地址
    */
-  function WeaBrandActive({ url }) {
+  function WeaBrandActive(url) {
     //基本配置项
     this.id = window.location.search.split('=')[1];
     this.url = url;
@@ -28,14 +28,15 @@
    * 点击加载更多
    */
   WeaBrandActive.prototype.loadMore = function() {
+    var self = this;
     // 链式操作，获取数据 => 渲染 Dom => 设置盒子盖度
-    this.fetchActiveList(this.url, this.id, this.iDisplayStart).then(() => {
+    self.fetchActiveList(self.url, self.id, self.iDisplayStart).then(function() {
         // 渲染主标题
-        this.renderTittle(this.name, this.enname, this.describe);
+        self.renderTittle(self.name, self.enname, self.describe);
         // 渲染列表
-        this.renderActiveList(this.list);
+        self.renderActiveList(self.list);
         // 修复所有盒子高度
-        this.fixListBoxHeight();
+        self.fixListBoxHeight();
     })
   }
   /**
@@ -47,15 +48,16 @@
    */
   WeaBrandActive.prototype.fetchActiveList = function(url, id, iDisplayStart) {
     var dfd = new $.Deferred();
+    var self = this;
     $.ajax({
       url: url + '?id=' + id + '&iDisplayStart=' + iDisplayStart,
       type: "GET",
       dataType: "jsonp",
       jsonp:'jsonpcallback',
-      success: (data) => {
+      success: function(data) {
         if(data.success){
           // 更新数据源
-          this.updateStore(data.name, data.describe, data.enname, data.iDisplayStart, data.cdate, data.list);
+          self.updateStore(data.name, data.describe, data.enname, data.iDisplayStart, data.cdate, data.list);
           data.iDisplayStart == 0 ? $('#wea_next_btn').hide() : console.log('已加载至最后一页');
           dfd.resolve()
         }else{
