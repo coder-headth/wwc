@@ -21,7 +21,7 @@
     <script src="../public/leftmain.js"></script>
     <script src="../public/righthead.js"></script>
     <style>
-        
+        .wea-more-btn{ text-align: center; cursor: pointer; }
     </style>
 </head>
 
@@ -37,7 +37,8 @@
         <div id="renderActiveList" class="mainBox">
 
         </div>
-        <h1 onclick="wea.loadMore()">点击我加载更多</h1>
+        <!-- 加载更多按钮 -->
+        <h4 class="wea-more-btn" id="wea_next_btn" onclick="wea.loadMore()">加载更多</h4>
     </div>
     <!-- Bootstrap 响应式前端框架 -->
     <script src="../libs/bootstrap/js/bootstrap.min.js"></script>
@@ -55,7 +56,7 @@
     <![endif]-->
     <script type="text/javascript">
         var wea = new WeaBrandActive({
-            url: 'http://192.168.1.75:8888/market/subpage/getActiveByCategory'
+            url: 'http://192.168.31.221:8080/market/subpage/getActiveByCategory'
         });
         $(document).ready(function() {
             wea.loadMore();
