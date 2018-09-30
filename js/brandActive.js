@@ -29,14 +29,16 @@
    */
   WeaBrandActive.prototype.loadMore = function() {
     var self = this;
-    // 链式操作，获取数据 => 渲染 Dom => 设置盒子盖度
-    self.fetchActiveList(self.url, self.id, self.iDisplayStart).then(function() {
+    // 链式操作，获取数据 => 渲染 Dom => 修复样式
+    self.fetchActiveList(self.url, self.id, self.iDisplayStart).then(function(data) {
+        // 更新数据源
+        self.updateStore(data.name, data.describe, data.enname, data.iDisplayStart, data.cdate, data.list);
         // 渲染主标题
         self.renderTittle(self.name, self.enname, self.describe);
         // 渲染列表
         self.renderActiveList(self.list);
-        // 修复所有盒子高度
-        self.fixListBoxHeight();
+        // 修复组件样式
+        self.fixStyle();
     })
   }
   /**
@@ -48,26 +50,13 @@
    */
   WeaBrandActive.prototype.fetchActiveList = function(url, id, iDisplayStart) {
     var dfd = new $.Deferred();
-    var self = this;
     $.ajax({
       url: url + '?id=' + id + '&iDisplayStart=' + iDisplayStart,
       type: "GET",
       dataType: "jsonp",
       jsonp:'jsonpcallback',
-      success: function(data) {
-        if(data.success){
-          // 更新数据源
-          self.updateStore(data.name, data.describe, data.enname, data.iDisplayStart, data.cdate, data.list);
-          data.iDisplayStart == 0 ? $('#wea_next_btn').hide() : console.log('已加载至最后一页');
-          dfd.resolve()
-        }else{
-          window.alert('请求失败');
-        }
-      },
-      error: function(err) {
-        dfd.reject(err);
-        window.alert('网络错误');
-      }
+      success: function(data) { data.success ? dfd.resolve(data) : dfd.reject('error: 服务端响应失败'); },
+      error: function(err) { dfd.reject(err); }
     });
     return dfd;
   }
@@ -187,14 +176,25 @@
   /**
    * 修复所有盒子高度
    */
-  WeaBrandActive.prototype.fixListBoxHeight = function() {
-    var _height = 0;
-    $(".listtextBox_title").each(function(n){
-        if($(this).height()>_height){
-            _height = $(this).height();
-        }
-    });
-    $(".listtextBox_title").height(_height);
+  WeaBrandActive.prototype.fixStyle = function() {
+    /**
+     * 设置活动项盒子高度
+     */
+    var fixListBoxHeight = function() {
+      var _height = 0;
+      $(".listtextBox_title").each(function(){
+        $(this).height()>_height ? _height = $(this).height() : _height = _height;
+      });
+      $(".listtextBox_title").height(_height);
+    }
+    /**
+     * 设置是否显示按钮
+     */
+    var fixLoadMoreBtn = function() {
+      this.iDisplayStart == 0 ? $('#wea_next_btn').hide() : console.log('已加载至最后一页');
+    }
+    fixListBoxHeight();
+    fixLoadMoreBtn.call(this);
   }
   /**
    * 函数-根据 cmonth 月份析构出 month 英文月份
