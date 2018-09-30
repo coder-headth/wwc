@@ -79,7 +79,7 @@
     var self = this;
     var tag = '';
     var _year = '';
-    $.map(list, function(item) {
+    list.map(function(item) {
       if(item.cyear != _year){
         tag += '<div class="Boxlist_years"><span class="Boxlist_years_t1">' + item.cyear + '</span><span class="Boxlist_years_t2">/ Years</span></div>';
         _year = item.cyear;
@@ -87,7 +87,7 @@
       tag +=   '<div class="Boxlist_Month">'
       tag +=       '<div class="Titlelist_Month">'
       tag +=           '<span class="Titlelist_Month_t1">' + item.cmonth + '月</span>'
-      tag +=           '<span class="Titlelist_Month_t2">/ August</span>'
+      tag +=           '<span class="Titlelist_Month_t2">/ ' + self.getMonthByCmonth(item.cmonth) + '</span>'
       tag +=       '</div>'
       tag +=       '<div class="listtype_PD2">'
       tag +=           '<div class="row">'
@@ -106,7 +106,7 @@
   WeaBrandActive.prototype.renderActiveDetail = function(list) {
     var tag = '';
     var self = this;
-    $.map(list, function(item) {
+    list.map(function(item) {
       tag += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">'
       tag +=    '<div class="listBox">'
       tag +=        self.renderSignUpInfo(item);
@@ -195,6 +195,31 @@
         }
     });
     $(".listtextBox_title").height(_height);
+  }
+  /**
+   * 函数-根据 cmonth 月份析构出 month 英文月份
+   * @param {String} cmonth 数字月份
+   * @returns {String} month 英文月份
+   */
+  WeaBrandActive.prototype.getMonthByCmonth = function(cmonth) {
+    var MONTH = [
+      { id: 0, cmonth: '01', month: 'Janurary' },
+      { id: 1, cmonth: '02', month: 'February' },
+      { id: 2, cmonth: '03', month: 'March' },
+      { id: 3, cmonth: '04', month: 'April' },
+      { id: 4, cmonth: '05', month: 'May' },
+      { id: 5, cmonth: '06', month: 'June' },
+      { id: 6, cmonth: '07', month: 'July' },
+      { id: 7, cmonth: '08', month: 'August' },
+      { id: 8, cmonth: '09', month: 'September' },
+      { id: 9, cmonth: '10', month: 'October' },
+      { id: 10, cmonth: '11', month: 'November' },
+      { id: 11, cmonth: '12', month: 'December' },
+    ];
+    var month = MONTH.filter(function(item) {
+      return item.cmonth === cmonth
+    })[0].month;
+    return month;
   }
 })(window, $);
 
