@@ -34,7 +34,7 @@
         // 更新数据源
         self.updateStore(data.name, data.describe, data.enname, data.iDisplayStart, data.cdate, data.list);
         // 渲染主标题
-        self.renderTittle(self.name, self.enname, self.describe);
+        self.renderTittle(self.id, self.name, self.enname, self.describe);
         // 渲染列表
         self.renderActiveList(self.list);
         // 修复组件样式
@@ -138,11 +138,12 @@
   }
   /**
    * 渲染标题信息
+   * @param {String} id 左侧菜单携带的页面id 
    * @param {String} name 页面名称 
    * @param {String} enname 英文名称
    * @param {String} descript 页面描述 
    */
-  WeaBrandActive.prototype.renderTittle = function(name, enname, describe) {
+  WeaBrandActive.prototype.renderTittle = function(id, name, enname, describe) {
     var tag = '';
     tag += '<div class="listTile">'
     tag +=     '<div class="listT1">'
@@ -150,7 +151,7 @@
     tag +=         '<span class="listT1_name2">' + enname + '</span>'
     tag +=     '</div>'
     tag +=     '<div class="listT3">'
-    tag +=         '<a href="http://www.weaver.com.cn/huodong2015/e8/#firstPage" target="_blank">进入专题页面</a>'
+    tag +=         '<a href=' + this.getSpecialTopicURLById(id) + ' target="_blank">进入专题页面</a>'
     tag +=         '<span>' + describe + '</span>'
     tag +=     '</div>'
     tag += '</div>'
@@ -216,10 +217,29 @@
       { id: 10, cmonth: '11', month: 'November' },
       { id: 11, cmonth: '12', month: 'December' },
     ];
-    var month = MONTH.filter(function(item) {
+    var month = MONTH.find(function(item) {
       return item.cmonth === cmonth
-    })[0].month;
+    }).month;
     return month;
+  }
+  /**
+   * 函数-根据菜单 id 查找活动专题 url
+   * @param {String} id 左侧菜单id
+   */
+  WeaBrandActive.prototype.getSpecialTopicURLById = function(id) {
+    var TOPIC = [
+      { id: 8, name: '智能化、平台化、全程电子化', url: 'http://weaver.com.cn/market/3trends/' },
+      { id: 7, name: '鲲鹏伙伴大会', url: 'https://eteams.cn/kunpeng' },
+      { id: 6, name: '移动办公大会', url: 'http://www.weaver.com.cn/market/emobile/index.html' },
+      { id: 5, name: '移动门户大会', url: 'http://www.weaver.com.cn/new/market/Mprotal/index.html' },
+      { id: 4, name: '标杆案例巡礼', url: 'http://www.weaver.com.cn/case2013/index.html' },
+      { id: 1, name: '百城巡展', url: 'http://www.weaver.com.cn/huodong-2012/' },
+      { id: 2, name: 'SAP高峰论坛', url: 'http://www.weaver.com.cn/huodong2012/forum/index.html' },
+    ];
+    var topic = TOPIC.find(function(item) {
+      return item.id == id
+    }).url;
+    return topic;
   }
 })(window, $);
 
