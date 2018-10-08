@@ -100,7 +100,7 @@
       tag +=    '<div class="listBox">'
       tag +=        self.renderSignUpInfo(item);
       tag +=        '<div class="listBox_sub">'
-      tag +=            '<a href=' + (item.linked ? item.linked : '#') + '>'
+      tag +=            '<a href=' + (item.linked ? item.linked : '/market/event/subpage/detail.html?id=' + item.id ) + '>'
       tag +=                '<div class="listimg"><img src=' + 'http://live.weaver.com.cn/file/' + item.pics + '></div>'
       tag +=                '<div class="listtextBox">'
       tag +=                    '<div class="listtextBox_title"><span class="listtextBox_tcity">' + item.city + '</span><span class="listtextBox_thotel">' + item.hotelname + '</span></div>'
@@ -171,7 +171,7 @@
     this.enname = enname;
     this.iDisplayStart = iDisplayStart;
     this.cdate = cdate;
-    this.list = this.list.concat(list);
+    list != undefined ? this.list = this.list.concat(list) : this.list = [];
   }
   /**
    * 修复所有盒子高度

@@ -103,7 +103,8 @@
 		        			if(activeList && activeList.length>0){
 			        			_html +="<div class=\"listtype\"><div class=\"listTile\">";
 			        			_html +="<div class=\"listT1\"><span class=\"listT1_name1\">"+n.categoryname+"</span><span class=\"listT1_name2\">"+n.categoryenname+"</span></div>";
-			        			_html +="<div class=\"listT2\"><span>"+n.categorydescribe+"</span><a href=\"javascript:void(0)\">查看更多活动</a></div>";
+								
+								_html +="<div class=\"listT2\"><span>"+n.categorydescribe+"</span><a href=\"/market/event/subpage/brandActive.html?id="+n.categoryid+"\">查看更多活动</a></div>";
 			        			_html +="</div>";
 			        			_html +="<div class=\"listtype_PD\"><div class=\"row\">";
 		        			   $.each(activeList,function(j,m){
