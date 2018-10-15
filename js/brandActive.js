@@ -39,6 +39,8 @@
         self.renderActiveList(self.list);
         // 修复组件样式
         self.fixStyle();
+        // 渲染顶部报名入口
+        self.renderTopAssign();
     })
   }
   /**
@@ -103,7 +105,7 @@
       tag +=            '<a href=' + (item.linked ? item.linked : '/market/event/subpage/detail.html?id=' + item.id ) + '>'
       tag +=                '<div class="listimg"><img src=' + 'http://live.weaver.com.cn/file/' + item.pics + '></div>'
       tag +=                '<div class="listtextBox">'
-      tag +=                    '<div class="listtextBox_title"><span class="listtextBox_tcity">' + item.city + '</span><span class="listtextBox_thotel">' + item.hotelname + '</span></div>'
+      tag +=                    '<div class="listtextBox_title"><span class="listtextBox_tcity">' + item.city + '</span><span class="listtextBox_thotel">-' + item.hotelname + '</span></div>'
       tag +=                    '<div class="listtextBox_info"><span class="listtextBox_info_notes">举办时间：</span><span class="listtextBox_info_time">' + item.startdate + '</span></div>'
       tag +=                '</div>'
       tag +=            '</a>'
@@ -240,6 +242,22 @@
       return item.id == id
     }).url;
     return topic;
+  },
+  /**
+   * 渲染顶部报名入口
+   */
+  WeaBrandActive.prototype.renderTopAssign = function() {
+    if($('.list_signupinfo').length === 0){
+      $('#baoming').append('<p>暂无活动报名</p>')
+    }else{
+      $('#baoming').append('<p>所有活动报名</p>')
+      $('.list_signupinfo').each(function(i, e) {
+        var name = $(e).next('.listBox_sub .listtextBox_thotel').text();
+        var link = $(e).next('a').attr('href');
+        var tag = '<p><a href=' + link + '>' + name + '</a></p>'
+        $('#baoming').append(tag);
+      })
+    }
   }
 })(window, $);
 

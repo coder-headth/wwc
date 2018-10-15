@@ -103,11 +103,9 @@
         <div class="signup_close">
             <a id="signupclose" href="javascript:void(0);">关闭</a>
         </div>
-        <div class="signup_Notes">
-			<div>所有活动报名</div>
-			<div>暂无活动报名 :)</div>
+        <div id="baoming" class="signup_Notes">
+			<!-- 该处由 brandActive.js 动态渲染 -->
         </div>
-     
     </div>
 </div>
 
@@ -182,75 +180,6 @@
 	   });
     });
     function aclick(id){
-           window.location = "/market/event/subpage/cityactive.html?id="+id;
-           /*
-           $.ajax({
-		      url: "http://live.weaver.com.cn/market/subpage/getIndexList",
-		      type: "post",
-		      dataType: "json",
-		      data:{"cityid":id},
-		      success: function (data) {
-		        if(data.success){
-		           var list = data.cList;
-		           if(list){
-		        		var _html ="";
-		        		var cdate = data.cdate;
-		        		$.each(list,function(i,n){
-		        			var activeList = n.activeList;
-		        			if(activeList && activeList.length>0){
-			        			var category = n.category;
-			        			_html +="<div class=\"listtype\"><div class=\"listTile\">";
-			        			_html +="<div class=\"listT1\"><span class=\"listT1_name1\">"+category.name+"</span><span class=\"listT1_name2\">"+category.enname+"</span></div>";
-			        			_html +="<div class=\"listT2\"><span>"+category.describe+"</span><a href=\"javascript:void(0)\">查看更多活动</a></div>";
-			        			_html +="</div>";
-			        			_html +="<div class=\"listtype_PD\"><div class=\"row\">";
-		        			   $.each(activeList,function(j,m){
-		        			      _html +="<div class=\"col-xs-12 col-sm-6 col-md-3 col-lg-2\"><div class=\"listBox\">";
-		        			     if(m.startdate!="" && cdate<m.startdate){
-		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_text\">";
-		        			        _html +="预约报名中...</div>";
-		        			        _html +="<div class=\"signup_listbtn\">";
-		        			        if(m.signuplinked){
-		        			           _html +="<a href=\""+m.signuplinked+"\" target='_blank'>报名</a>";
-		        			        }else{
-		        			           _html +="<a href=\"#\">报名</a>";
-		        			        }
-		        			        _html +="</div></div>";
-		        			     }
-		        			     if(m.startdate!="" && cdate==m.startdate){
-		        			        _html +="<div class=\"list_signupinfo\"><div class=\"signup_listbtn2\">";
-		        			        _html +="<a href=\"javaScript:void(0)\">今天</a>";
-		        			        _html +="</div></div>";
-		        			     }
-		        			      _html +="<div class=\"listBox_sub\">";
-		        			      if(m.linked!=null && m.linked!=""){
-		        			        _html +="<a href=\""+m.linked+"\" target='_blank'>";
-		        			      }else{
-		        			        _html +="<a href=\"#\" target='_blank'>";
-		        			      }
-		        			      _html +="<div class=\"listimg\"><img src=\"http://live.weaver.com.cn/file/"+m.pics+"\"/></div>";
-		        			      _html +="<div class=\"listtextBox\"><div class=\"listtextBox_title\">";
-		        			      _html +="<span class=\"listtextBox_tcity\">"+m.city+"</span><span class=\"listtextBox_thotel\">-"+m.hotelname+"</span>";
-		        			      _html +="</div>";
-		        			      if(m.startdate!=""){
-		        			         _html +="<div class=\"listtextBox_info\"><span class=\"listtextBox_info_notes\">举办时间：</span><span class=\"listtextBox_info_time\">"+m.startdate+"</span></div>";
-		        			      }
-		        			      _html +="</div>";
-		        			      _html +="</a></div>";
-		        			      _html +="</div></div>";
-		        			   })
-		        			}
-		        			_html +="</div></div>";
-		        			_html +="</div>";
-		        		});
-		        		$("#i_mainBox").empty().append(_html);
-		        	}
-		        }
-		      },
-		      error: function () {
-		      },
-		      complete: function () {
-		      }
-		   });*/
-        }
+		window.location = "/market/event/subpage/cityactive.html?id="+id;
+	}
 </script>
